@@ -1,5 +1,7 @@
 package rest;
 
+import parallel.ParallelJokes;
+
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -24,8 +26,13 @@ public class JokeResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getJokes() {
-        return " {\"info\":\"Change me to return jokes as described in the exercise\"}";
-    }
+        ParallelJokes jokes = new ParallelJokes();
+        String msg = "";
 
-   
+        for (int i = 0; i < jokes.getJokes().size(); i++) {
+            msg += jokes.getJokes().get(i).getValue() + "\n";
+        }
+
+        return msg;
+    }
 }
